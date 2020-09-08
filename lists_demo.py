@@ -73,3 +73,31 @@ print('Three items from the middle of the list are:')
 print(players[1:4])
 print('The last three items in the list are:')
 print(players[-3:])
+
+# 元组(tuples)
+print('\n元组：')
+dimensions=(200,50)
+print(dimensions[0])
+print(dimensions[1])
+#尝试修改元组的元素，会出错
+#dimensions[1]=250
+print('\n遍历元组')
+for d in dimensions:
+    print(d)
+
+#修改元组变量，不会出错
+dimensions=(400,100)
+for d in dimensions:
+    print(d)
+
+foods=('面条','馄饨', '白菜','酸辣汤', '小笼包')
+for f in foods:
+    print(f)
+#foods[0]='小馄饨'
+foods = ('面条', '鱼', '猪肉', '酸辣汤', '小笼包')
+for f in foods:
+    if f == '鱼' or f=='猪肉':
+        print('吃了一条鱼')
+    print(f)
+print('钱' in foods)
+print('鱼' in foods)
