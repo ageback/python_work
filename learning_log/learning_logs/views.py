@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
@@ -9,6 +10,7 @@ def index(request):
     return render(request, 'learning_logs/index.html')
 
 
+@login_required
 def topics(request):
     """显示所有主题"""
     topics = Topic.objects.order_by('date_added')
@@ -16,6 +18,7 @@ def topics(request):
     return render(request, 'learning_logs/topics.html', context)
 
 
+@login_required
 def topic(request, topic_id):
     topic = Topic.objects.get(id=topic_id)
     entries = topic.entry_set.order_by('-date_added')
@@ -23,6 +26,7 @@ def topic(request, topic_id):
     return render(request, 'learning_logs/topic.html', context)
 
 
+@login_required
 def new_topic(request):
     """
     添加新主题
@@ -42,6 +46,7 @@ def new_topic(request):
     return render(request, 'learning_logs/new_topic.html', context)
 
 
+@login_required
 def new_entry(request, topic_id):
     topic = Topic.objects.get(id=topic_id)
 
@@ -59,6 +64,7 @@ def new_entry(request, topic_id):
     return render(request, 'learning_logs/new_entry.html', context)
 
 
+@login_required
 def edit_entry(request, entry_id):
     entry = Entry.objects.get(id=entry_id)
     topic = entry.topic
