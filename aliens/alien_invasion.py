@@ -21,16 +21,20 @@ class AlienInvasion:
 
     def run_game(self):
         while True:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
+            self._check_events()
+            self._update_screen()
 
-            # 每次循环时都重绘屏幕
-            self.screen.fill(self.settings.bg_color)
-            self.ship.blitme()
+    def _update_screen(self):
+        # 每次循环时都重绘屏幕
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
+        # 让最近绘制的屏幕可见。
+        pygame.display.flip()
 
-            # 让最近绘制的屏幕可见。
-            pygame.display.flip()
+    def _check_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
 
 
 if __name__ == '__main__':
