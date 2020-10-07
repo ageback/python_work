@@ -46,7 +46,6 @@ class AlienInvasion:
             elif event.type == pygame.KEYUP:
                 self._check_key_up_events(event)
 
-
     def _check_key_up_events(self, event):
         """响应松开"""
         if event.key == pygame.K_RIGHT:

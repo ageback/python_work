@@ -6,6 +6,10 @@ class Settings:
 
         # 飞船设置
         self.ship_speed = 1.5
-        self.screen_x = 0
-        self.screen_y = 0
         self.bg_color = (230, 230, 230)
+
+        # 子弹设置
+        self.bullet_speed = 1.0
+        self.bullet_width = 3
+        self.bullet_height = 15
+        self.bullet_color = (60, 60, 60)
