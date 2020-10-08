@@ -178,6 +178,7 @@ class AlienInvasion:
         """
         if self.stats.ships_left > 0:
             self.stats.ships_left -= 1
+            self.stats.reset_stats()
 
             self.aliens.empty()
             self.bullets.empty()
