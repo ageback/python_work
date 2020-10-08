@@ -1,5 +1,6 @@
 import sys
 import pygame
+import os.path
 from time import sleep
 
 from alien import Alien
@@ -39,8 +40,9 @@ class AlienInvasion:
 
     def read_highscore(self):
         highscore_file = 'high_score.txt'
-        with open(highscore_file) as file_obj:
-            self.stats.high_score = int(file_obj.read())
+        if os.path.exists(highscore_file):
+            with open(highscore_file) as file_obj:
+                self.stats.high_score = int(file_obj.read())
 
     def set_screen_mode(self):
         if not self.settings.full_screen_mode:
