@@ -64,7 +64,7 @@ class AlienInvasion:
             self._update_screen()
 
     def _fire_bullet(self):
-        if len(self.bullets) < self.settings.bullets_allowed:
+        if len(self.bullets) < self.settings.bullets_allowed and self.stats.game_active:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
 
