@@ -116,6 +116,8 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
+        elif event.key == pygame.K_p:
+            self._start_game()
 
     def _create_fleet(self):
         """创建外星人群"""
@@ -168,6 +170,7 @@ class AlienInvasion:
             sleep(0.5)
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _check_fleet_edges(self):
         for alien in self.aliens.sprites():
@@ -192,8 +195,19 @@ class AlienInvasion:
                 break
 
     def _check_play_button(self, mouse_pos):
-        if self.play_button.rect.collidepoint(mouse_pos):
-            self.stats.game_active = True
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+        if button_clicked and not self.stats.game_active:
+            self._start_game()
+
+    def _start_game(self):
+        self.stats.reset_stats()
+        self.stats.game_active = True
+        self.aliens.empty()
+        self.bullets.empty()
+        self._create_fleet()
+        self.ship.center_ship()
+        # 隐藏鼠标光标
+        pygame.mouse.set_visible(False)
 
 
 if __name__ == '__main__':
