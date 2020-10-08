@@ -87,6 +87,10 @@ class AlienInvasion:
             # 消灭所有外星人后提高游戏速度
             self.settings.increase_speed()
 
+            # 提高等级
+            self.stats.level += 1
+            self.sb.prep_level()
+
     def _update_screen(self):
         # 每次循环时都重绘屏幕
         self.screen.fill(self.settings.bg_color)
@@ -134,7 +138,7 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
-        elif event.key == pygame.K_p:
+        elif event.key == pygame.K_s:
             self._start_game()
 
     def _create_fleet(self):
@@ -224,6 +228,7 @@ class AlienInvasion:
         self.stats.reset_stats()
         self.stats.game_active = True
         self.sb.prep_score()
+        self.sb.prep_level()
         self.aliens.empty()
         self.bullets.empty()
         self._create_fleet()
