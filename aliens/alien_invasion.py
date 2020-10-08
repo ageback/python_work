@@ -26,6 +26,7 @@ class AlienInvasion:
         # 创建一个用于存储游戏统计信息的实例。
         #   并创建记分牌。
         self.stats = GameStats(self)
+        self.read_highscore()
         self.sb = Scoreboard(self)
 
         self.ship = Ship(self)
@@ -35,6 +36,11 @@ class AlienInvasion:
         self._create_fleet()
 
         self.play_button = Button(self, "Play")
+
+    def read_highscore(self):
+        highscore_file = 'high_score.txt'
+        with open(highscore_file) as file_obj:
+            self.stats.high_score = int(file_obj.read())
 
     def set_screen_mode(self):
         if not self.settings.full_screen_mode:
@@ -111,7 +117,7 @@ class AlienInvasion:
     def _check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                sys.exit()
+                self.exit_game()
             elif event.type == pygame.KEYDOWN:
                 self._check_key_down_events(event)
             elif event.type == pygame.KEYUP:
@@ -135,11 +141,17 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
         elif event.key == pygame.K_q:
-            sys.exit()
+            self.exit_game()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
         elif event.key == pygame.K_s:
             self._start_game()
+
+    def exit_game(self):
+        highscore_file = 'high_score.txt'
+        with open(highscore_file, 'w') as file_obj:
+            file_obj.write(str(self.stats.high_score))
+        sys.exit()
 
     def _create_fleet(self):
         """创建外星人群"""
